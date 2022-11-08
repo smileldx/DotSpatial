@@ -63,7 +63,8 @@ namespace DotSpatial.Controls
         /// </summary>
         public MapFrame()
         {
-            base.ViewExtents = new Extent(-180, 180, -90, 90);
+            base.ViewExtents = new Extent(-180, -90, 180, 90);
+
             if (Data.DataSet.ProjectionSupported())
             {
                 Projection = KnownCoordinateSystems.Geographic.World.WGS1984;
@@ -428,7 +429,7 @@ namespace DotSpatial.Controls
             }
 
             set
-            {
+             {
                 if (_view == value) return;
 
                 var h = ViewChanged;
@@ -693,7 +694,7 @@ namespace DotSpatial.Controls
             }
 
             Graphics bufferDevice = Graphics.FromImage(_backBuffer);
-            MapArgs args = new(ClientRectangle, ViewExtents, bufferDevice);
+             MapArgs args = new(ClientRectangle, ViewExtents, bufferDevice);
             GraphicsPath gp = new();
             foreach (Extent region in regions)
             {
@@ -710,7 +711,7 @@ namespace DotSpatial.Controls
 
             // First draw all the vector content
             var layers = Layers.Where(_ => _.VisibleAtExtent(ViewExtents)).ToList();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 // first draw the normal colors and then the selection colors on top
                 foreach (IMapLayer layer in layers)
@@ -729,7 +730,7 @@ namespace DotSpatial.Controls
 
             // First draw all the vector content
             var drawingLayers = DrawingLayers.OfType<IMapLayer>().Where(_ => _.VisibleAtExtent(ViewExtents)).ToList();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 // first draw the normal colors and then the selection colors on top
                 foreach (var layer in drawingLayers)
